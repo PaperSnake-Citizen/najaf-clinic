@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Header is sticky, so leave room when jumping to a section */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes ring {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+  70% { box-shadow: 0 0 0 16px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.float-slow { animation: float 7s ease-in-out infinite; }
+.float-slower { animation: float 10s ease-in-out infinite reverse; }
+.pop-in { opacity: 0; animation: pop-in 0.7s ease-out forwards; }
+.cta-ring { animation: ring 2s infinite; }
+.live-dot { animation: blink 1.5s infinite; }
+.bg-pan { background-size: 200% 200%; animation: gradient-pan 12s ease infinite; }
+
+/* ---------- Urdu mode (set by LanguageProvider on <html>) ---------- */
+html[lang="ur"] body,
+html[lang="ur"] .font-sans {
+  font-family: "Noto Nastaliq Urdu", serif !important;
+}
+
+/* Letter spacing and uppercase break joined Urdu letters */
+html[lang="ur"] * {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Nastaliq letters are tall and get clipped with tight line height */
+html[lang="ur"] h1,
+html[lang="ur"] h2,
+html[lang="ur"] h3,
+html[lang="ur"] p,
+html[lang="ur"] li,
+html[lang="ur"] label,
+html[lang="ur"] a,
+html[lang="ur"] button,
+html[lang="ur"] span {
+  line-height: 2 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow, .float-slower, .cta-ring, .live-dot, .bg-pan { animation: none; }
+  .pop-in { animation: none; opacity: 1; }
+}
